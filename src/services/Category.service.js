@@ -1,3 +1,7 @@
-// const { Category } = require('../models');
+const { Category } = require('../models');
 
-// const 
+const insertCategory = (data) => Category.create(data);
+
+module.exports = {
+  insertCategory,
+};
