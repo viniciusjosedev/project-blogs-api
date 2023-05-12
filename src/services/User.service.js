@@ -11,8 +11,11 @@ const insertUser = (data) => User.create(data);
 
 const findAll = () => User.findAll();
 
+const findById = (id) => User.findByPk(id);
+
 module.exports = {
   getAcess,
   insertUser,
   findAll,
+  findById,
 };

@@ -31,8 +31,20 @@ const findAll = async (req, res) => {
   return res.status(200).json(result);
 };
 
+const findById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await userService.findById(id);
+    delete result.dataValues.password;
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
+};
+
 module.exports = {
   getAcess,
   insertUser,
   findAll,
+  findById,
 };

@@ -9,6 +9,8 @@ const userRouter = new Router();
 
 userRouter.get('/user', isAuth, userController.findAll);
 
+userRouter.get('/user/:id', isAuth, userController.findById);
+
 userRouter.post('/login', loginAuth);
 
 userRouter.post('/user', userBodyCreateValidate, userController.insertUser);
