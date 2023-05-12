@@ -15,4 +15,6 @@ categoryRouter.post(
   categoryController.insertCategory,
 );
 
+categoryRouter.get('/categories', isAuth, categoryController.findAll);
+
 module.exports = categoryRouter;
