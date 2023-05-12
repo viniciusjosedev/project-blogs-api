@@ -9,7 +9,10 @@ const getAcess = async ({ password, email }) => User.findOne({
 
 const insertUser = (data) => User.create(data);
 
+const findAll = () => User.findAll();
+
 module.exports = {
   getAcess,
   insertUser,
+  findAll,
 };

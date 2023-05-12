@@ -25,7 +25,14 @@ const insertUser = async (req, res) => {
   }
 };
 
+const findAll = async (req, res) => {
+  const result = await userService.findAll();
+  result.forEach((_e, i) => delete result[i].dataValues.password);
+  return res.status(200).json(result);
+};
+
 module.exports = {
   getAcess,
   insertUser,
+  findAll,
 };
