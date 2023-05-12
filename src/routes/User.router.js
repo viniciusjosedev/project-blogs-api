@@ -1,10 +1,13 @@
 const { Router } = require('express');
 
+const { userBodyCreateValidate } = require('../middlewares/User.validation');
 const userController = require('../controllers/User.controller');
-const auth = require('../auth/auth');
+const loginAuth = require('../auth/loginAuth');
 
 const userRouter = new Router();
 
-userRouter.post('/login', auth, userController.getAcess);
+userRouter.post('/login', loginAuth);
+
+userRouter.post('/user', userBodyCreateValidate, userController.insertUser);
 
 module.exports = userRouter;
