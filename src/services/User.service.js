@@ -1,4 +1,4 @@
-const { User, BlogsPost } = require('../models');
+const { User, BlogPost } = require('../models');
 
 const getAcess = async ({ password, email }) => User.findOne({
   where: {

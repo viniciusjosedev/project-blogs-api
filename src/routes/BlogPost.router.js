@@ -8,6 +8,8 @@ const blogPostController = require('../controllers/BlogPost.controller');
 
 const blogPostRouter = new Router();
 
+blogPostRouter.get('/post', isAuth, blogPostController.findAll);
+
 blogPostRouter.post('/post', isAuth, blogPostBodyCreateValidate, blogPostController.insertBlogPost);
 
 module.exports = blogPostRouter;
