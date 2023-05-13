@@ -1,6 +1,7 @@
-const { Category } = require('../models');
+const { Category, sequelize } = require('../models');
 
-const insertCategory = (data) => Category.create(data);
+const insertCategory = (data) => sequelize.transaction(async (t) => 
+  Category.create(data, { transaction: t }));
 
 const findAll = () => Category.findAll();
 

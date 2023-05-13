@@ -7,7 +7,8 @@ const getAcess = async ({ password, email }) => User.findOne({
   },
 });
 
-const insertUser = (data) => User.create(data);
+const insertUser = (data) => sequelize.transaction(async (t) => 
+  User.create(data, { transaction: t }));
 
 const findAll = () => User.findAll();
 
