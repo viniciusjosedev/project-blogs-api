@@ -21,8 +21,8 @@ const insertBlogPost = async (
 
 const findAll = () => BlogPost.findAll({
   include: [
-    { model: User, as: 'user', attributes: { exclude: ['password', 'PostCategory'] } }, 
-    { model: Category, as: 'categories' }],
+    { model: User, as: 'user', attributes: { exclude: ['password'] } }, 
+    { model: Category, as: 'categories', through: null }],
 });
 
 module.exports = {
