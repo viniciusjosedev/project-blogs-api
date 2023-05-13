@@ -28,12 +28,12 @@ module.exports = (Sequelize, DataTypes) => {
 		published: {
 			type: DataTypes.DATE,
 			allowNull: false,
-			defaultValue: Sequelize.fn('now')
+			defaultValue: new Date()
 		},
 		updated: {
 			type: DataTypes.DATE,
 			allowNull: false,
-			defaultValue: Sequelize.fn('now')
+			defaultValue: new Date()
 		}
 	}, {
 		tableName: 'blog_posts',
