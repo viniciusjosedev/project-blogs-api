@@ -13,6 +13,8 @@ blogPostRouter.get('/post', isAuth, blogPostController.findAll);
 
 blogPostRouter.get('/post/:id', isAuth, blogPostController.findById);
 
+blogPostRouter.delete('/post/:id', isAuth, blogPostController.deleteBlogPost);
+
 blogPostRouter.put(
   '/post/:id', 
   isAuth,

@@ -13,7 +13,7 @@ const findAll = () => User.findAll();
 
 const findById = (id) => User.findByPk(id);
 
-const findByIdBlogPost = async (idUser) => User.findOne({
+const findByIdWithBlogPost = async (idUser) => User.findOne({
   where: {
     id: idUser,
   },
@@ -28,5 +28,5 @@ module.exports = {
   insertUser,
   findAll,
   findById,
-  findByIdBlogPost,
+  findByIdWithBlogPost,
 };

@@ -37,9 +37,13 @@ const updateBlogPost = (data, id) => sequelize.transaction(async (t) =>
     transaction: t,
 }));
 
+const deleteBlogPost = (id) => sequelize.transaction(async (t) =>
+  BlogPost.destroy({ where: { id }, transaction: t }));
+
 module.exports = {
   insertBlogPost,
   findAll,
   findById,
   updateBlogPost,
+  deleteBlogPost,
 };
