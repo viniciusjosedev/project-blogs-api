@@ -15,4 +15,6 @@ userRouter.post('/login', loginAuth);
 
 userRouter.post('/user', userBodyCreateValidate, userController.insertUser);
 
+userRouter.delete('/user/me', isAuth, userController.deleteUser);
+
 module.exports = userRouter;

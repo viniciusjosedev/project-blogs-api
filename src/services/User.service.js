@@ -1,4 +1,4 @@
-const { User, BlogPost } = require('../models');
+const { User, BlogPost, sequelize } = require('../models');
 
 const getAcess = async ({ password, email }) => User.findOne({
   where: {
@@ -13,9 +13,9 @@ const findAll = () => User.findAll();
 
 const findById = (id) => User.findByPk(id);
 
-const findByIdWithBlogPost = async (idUser) => User.findOne({
+const findByIdWithBlogPost = async (id) => User.findOne({
   where: {
-    id: idUser,
+    id,
   },
   include: {
     model: BlogPost,
@@ -23,10 +23,14 @@ const findByIdWithBlogPost = async (idUser) => User.findOne({
   },
 });
 
+const deleteUser = async (id) => sequelize.transaction(async (t) => 
+  User.destroy({ where: { id } }, { transaction: t }));
+
 module.exports = {
   getAcess,
   insertUser,
   findAll,
   findById,
   findByIdWithBlogPost,
+  deleteUser,
 };

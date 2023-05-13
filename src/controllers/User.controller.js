@@ -2,6 +2,8 @@ const userService = require('../services/User.service');
 
 const generateAuth = require('../auth/generateAuth');
 
+const messageDefault = 'Algo de errado aconteceu!';
+
 const getAcess = async (req, res) => {
   const { password, email } = req.body;
   const data = await userService.getAcess({ password, email });
@@ -26,9 +28,13 @@ const insertUser = async (req, res) => {
 };
 
 const findAll = async (_req, res) => {
-  const result = await userService.findAll();
-  result.forEach((_e, i) => delete result[i].dataValues.password);
-  return res.status(200).json(result);
+  try {
+    const result = await userService.findAll();
+    result.forEach((_e, i) => delete result[i].dataValues.password);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(400).json({ message: messageDefault, error: error.message });
+  }
 };
 
 const findById = async (req, res) => {
@@ -42,9 +48,22 @@ const findById = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const { data: { id } } = req;
+
+    await userService.deleteUser(id);
+    
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(400).json({ message: messageDefault, error: error.message });
+  }
+};
+
 module.exports = {
   getAcess,
   insertUser,
   findAll,
   findById,
+  deleteUser,
 };
