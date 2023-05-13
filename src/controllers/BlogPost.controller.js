@@ -73,7 +73,19 @@ const deleteBlogPost = async (req, res) => {
 
     return res.status(204).json();
   } catch (error) {
-    return res.status(500).json({ message: 'Algo de errado aconteceu!', error: error.message }); 
+    return res.status(500).json({ message: 'Algo de errado aconteceu!', error: error.message });
+  }
+};
+
+const findBySearch = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    const result = await blogPostService.findBySearch(q);
+
+   return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: 'Algo de errado aconteceu!', error: error.message });
   }
 };
 
@@ -83,4 +95,5 @@ module.exports = {
   findById,
   updateBlogPost,
   deleteBlogPost,
+  findBySearch,
 };

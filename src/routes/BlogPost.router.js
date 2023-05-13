@@ -11,6 +11,8 @@ const blogPostRouter = new Router();
 
 blogPostRouter.get('/post', isAuth, blogPostController.findAll);
 
+blogPostRouter.get('/post/search', isAuth, blogPostController.findBySearch);
+
 blogPostRouter.get('/post/:id', isAuth, blogPostController.findById);
 
 blogPostRouter.delete('/post/:id', isAuth, blogPostController.deleteBlogPost);
