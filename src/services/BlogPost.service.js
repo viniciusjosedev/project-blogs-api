@@ -21,7 +21,7 @@ const insertBlogPost = async (
 
 const findAll = () => BlogPost.findAll({
   include: [
-    { model: User, as: 'user', attributes: { exclude: ['password'] } }, 
+    { model: User, as: 'user', attributes: { exclude: ['password'] } },
     { model: Category, as: 'categories', through: null }],
 });
 
@@ -31,8 +31,15 @@ const findById = (id) => BlogPost.findByPk(id, {
     { model: Category, as: 'categories', through: null }],
 });
 
+const updateBlogPost = (data, id) => sequelize.transaction(async (t) => 
+  BlogPost.update(data, {
+    where: { id },
+    transaction: t,
+}));
+
 module.exports = {
   insertBlogPost,
   findAll,
   findById,
+  updateBlogPost,
 };

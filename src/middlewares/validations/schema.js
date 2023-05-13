@@ -17,8 +17,14 @@ const blogPostBodyCreateSchema = Joi.object({
   categoryIds: Joi.array().items(Joi.number(), Joi.string()).min(1).required(),
 });
 
+const blogPostBodyUpdateSchema = Joi.object({
+  title: Joi.string().min(1),
+  content: Joi.string().min(1),
+}).or('title', 'content');
+
 module.exports = {
   userBodyCreateSchema,
   categoryBodyCreateSchema,
   blogPostBodyCreateSchema,
+  blogPostBodyUpdateSchema,
 };

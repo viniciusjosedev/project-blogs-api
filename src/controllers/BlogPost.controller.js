@@ -1,5 +1,6 @@
 const blogPostService = require('../services/BlogPost.service');
 const categoryService = require('../services/Category.service');
+const userService = require('../services/User.service');
 
 const insertBlogPost = async (req, res) => {
   try {
@@ -35,8 +36,31 @@ const findById = async (req, res) => {
   }
 };
 
+const updateBlogPost = async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const { data, params: { id } } = req;
+    
+    const listByIdBlogPost = await userService.findByIdBlogPost(data.id);
+
+    const verificate = listByIdBlogPost.dataValues
+      .BlogPost.some((e) => e.dataValues.id === Number(id));
+
+    if (!verificate) return res.status(401).json({ message: 'Unauthorized user' });
+
+    await blogPostService.updateBlogPost({ title, content }, id);
+
+    const result = await blogPostService.findById(id);
+    
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: 'Algo de errado aconteceu!', error: error.message }); 
+  }
+};
+
 module.exports = {
   insertBlogPost,
   findAll,
   findById,
+  updateBlogPost,
 };

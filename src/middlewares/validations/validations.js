@@ -18,8 +18,15 @@ const blogPostBodyCreateValidate = (body) => {
   return { type: 'ERROR', message: error.message };
 };
 
+const blogPostBodyUpdateValidate = (body) => {
+  const { error } = schema.blogPostBodyUpdateSchema.validate(body);
+  if (!error) return { type: undefined };
+  return { type: 'ERROR', message: error.message };
+};
+
 module.exports = {
   userBodyCreateValidate,
   categoryBodyCreateValidate,
   blogPostBodyCreateValidate,
+  blogPostBodyUpdateValidate,
 };
