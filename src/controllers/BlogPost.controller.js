@@ -24,7 +24,19 @@ const findAll = async (req, res) => {
   }
 };
 
+const findById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await blogPostService.findById(id);
+    if (!result) return res.status(404).json({ message: 'Post does not exist' });
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: 'Algo de errado aconteceu!', error: error.message }); 
+  }
+};
+
 module.exports = {
   insertBlogPost,
   findAll,
+  findById,
 };

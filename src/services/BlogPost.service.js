@@ -25,7 +25,14 @@ const findAll = () => BlogPost.findAll({
     { model: Category, as: 'categories', through: null }],
 });
 
+const findById = (id) => BlogPost.findByPk(id, {
+  include: [
+    { model: User, as: 'user', attributes: { exclude: ['password'] } }, 
+    { model: Category, as: 'categories', through: null }],
+});
+
 module.exports = {
   insertBlogPost,
   findAll,
+  findById,
 };

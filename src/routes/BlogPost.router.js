@@ -10,6 +10,8 @@ const blogPostRouter = new Router();
 
 blogPostRouter.get('/post', isAuth, blogPostController.findAll);
 
+blogPostRouter.get('/post/:id', isAuth, blogPostController.findById);
+
 blogPostRouter.post('/post', isAuth, blogPostBodyCreateValidate, blogPostController.insertBlogPost);
 
 module.exports = blogPostRouter;
